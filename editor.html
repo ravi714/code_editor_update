@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    this is me editor
+    <textarea autofocus id="textare" onkeydown="run(event)"></textarea>
+    <button onclick="runme()">Run</button>
+    <iframe style="resize: both;" src="" frameborder="0" id="frmaeme"></iframe>
+</body>
+<script>
+    let code = document.getElementById("textare")
+    function run(eve) {
+        if (eve.key == "Tab") {
+            var val = eve.target.value;
+            let start = eve.target.selectionStart
+            eve.target.value = val.substr(0, start) + "\t" + val.substr(start)
+            eve.target.setSelectionRange(start + 1, start + 1)
+            eve.preventDefault()
+        }
+
+    }
+    function runme() {
+        var codeframe = document.getElementById("frmaeme")
+        frame = codeframe.contentDocument || codeframe.contentWindow.document
+        frame.body.innerHTML=""
+        frame.head.innerHTML=""
+        frame.write(code.value)
+
+
+    }
+    
+</script>
+
+</html>
